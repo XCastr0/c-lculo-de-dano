@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Dano</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="js.js" defer></script>
+</head>
+<body>
+    <h1>Cálculo de Dano</h1>
+    <div class="container">
+        <!-- Primeiro Personagem -->
+        <div class="character">
+            <h2>Personagem 1</h2>
+            <img id="character1" src="placeholder1.jpg" alt="Personagem 1">
+            <input type="file" id="upload1" accept="image/*">
+            <label for="attack-power">Poder de Ataque:</label>
+            <input type="number" id="attack-power" placeholder="Digite o poder de ataque">
+        </div>
+
+        <!-- Segundo Personagem -->
+        <div class="character">
+            <h2>Personagem 2</h2>
+            <img id="character2" src="placeholder2.jpg" alt="Personagem 2">
+            <input type="file" id="upload2" accept="image/*">
+            <label for="defense-power">Poder de Defesa:</label>
+            <input type="number" id="defense-power" placeholder="Digite o poder de defesa">
+            <label for="health-points">Pontos de Vida:</label>
+            <input type="number" id="health-points" placeholder="Digite os pontos de vida">
+            <label for="has-shield">Possui Escudo?</label>
+            <select id="has-shield">
+                <option value="true">Sim</option>
+                <option value="false">Não</option>
+            </select>
+        </div>
+    </div>
+
+    <button id="calculate-damage">Calcular Dano</button>
+
+    <!-- Resultado -->
+    <div id="result" class="result">
+        <!-- O resultado será atualizado pelo JS -->
+    </div>
+</body>
+</html>
