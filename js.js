@@ -1,3 +1,4 @@
+// Manipula o upload da imagem do primeiro personagem
 document.getElementById("upload1").addEventListener("change", function (event) {
     const file = event.target.files[0];
     if (file) {
@@ -9,7 +10,7 @@ document.getElementById("upload1").addEventListener("change", function (event) {
     }
 });
 
-// Manipula o upload da segunda imagem
+// Manipula o upload da imagem do segundo personagem
 document.getElementById("upload2").addEventListener("change", function (event) {
     const file = event.target.files[0];
     if (file) {
@@ -21,29 +22,48 @@ document.getElementById("upload2").addEventListener("change", function (event) {
     }
 });
 
-const nomePers1 = prompt("Digite o nome do primeiro personagem");
-const ataqPrimeiroPers = parseFloat(prompt("Digite o poder de ataque do primeiro personagem"));
-const nomePers2 = prompt("Digite o nome do segundo personagem");
-const pontosVida = parseFloat(prompt("Digite a quantidade de pontos de vida do segundo personagem"));
-const poderDefesa = parseFloat(prompt("Digite o poder de defesa do segundo personagem"));
-const escudo = prompt("Ele possui escudo? responda apenas com sim ou não");
+// Calcula o dano baseado nas regras
+document.getElementById("calcular-dano").addEventListener("click", function () {
+    // Obter valores dos campos
+    const nomePers1 = document.getElementById("nome-pers1").value;
+    const ataqPrimeiroPers = parseFloat(document.getElementById("ataque-pers1").value);
+    const nomePers2 = document.getElementById("nome-pers2").value;
+    const pontosVida = parseFloat(document.getElementById("vida-pers2").value);
+    const poderDefesa = parseFloat(document.getElementById("defesa-pers2").value);
+    const escudo = document.getElementById("escudo-pers2").value;
 
-if (ataqPrimeiroPers>poderDefesa && escudo==="não" ) {
-    const danoCausado = ataqPrimeiroPers - poderDefesa
-    alert("o dano causado é " + danoCausado)
-  } else if (ataqPrimeiroPers>poderDefesa && escudo==="sim"){
-    danoCausado = (ataqPrimeiroPers-poderDefesa)/2
-    alert("o dano causado é " + danoCausado)
-  } else if (ataqPrimeiroPers<=poderDefesa){
-    danoCausado = 0
-    alert("o dano causado é " + danoCausado)
-  }
-const resultado =    pontosVida -danoCausado
+    // Validar entradas
+    if (
+        !nomePers1 ||
+        isNaN(ataqPrimeiroPers) ||
+        !nomePers2 ||
+        isNaN(pontosVida) ||
+        isNaN(poderDefesa)
+    ) {
+        alert("Por favor, preencha todos os campos corretamente.");
+        return;
+    }
 
-alert(
-    "O valor de vida do segundo personagem é " + resultado + "\n\n" +
-    "O dano causado foi " + danoCausado + "\n\n" +
-    "A quantidade de pontos de vida foi " + pontosVida + "\n\n" +
-    "O valor de defesa foi " + poderDefesa + "\n\n" +
-    "O valor do escudo foi " + escudo
-  );
+    // Calcular dano
+    let danoCausado = 0;
+    if (ataqPrimeiroPers > poderDefesa && escudo === "não") {
+        danoCausado = ataqPrimeiroPers - poderDefesa;
+    } else if (ataqPrimeiroPers > poderDefesa && escudo === "sim") {
+        danoCausado = (ataqPrimeiroPers - poderDefesa) / 2;
+    }
+
+    // Calcular vida restante
+    const vidaRestante = Math.max(pontosVida - danoCausado, 0); // Evitar valores negativos
+
+    // Exibir resultado no HTML
+    const resultDiv = document.getElementById("result");
+    resultDiv.style.display = "block";
+    resultDiv.innerHTML = `
+        <h3>Resultado do Cálculo</h3>
+        <p><strong>${nomePers1}</strong> causou <strong>${danoCausado}</strong> de dano a <strong>${nomePers2}</strong>.</p>
+        <p>Pontos de vida restantes de <strong>${nomePers2}</strong>: <strong>${vidaRestante}</strong>.</p>
+        <p><strong>${nomePers2}</strong> tinha inicialmente <strong>${pontosVida}</strong> pontos de vida, <strong>${poderDefesa}</strong> de defesa e ${
+        escudo === "sim" ? "possuía" : "não possuía"
+    } escudo.</p>
+    `;
+});

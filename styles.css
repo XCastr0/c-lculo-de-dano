@@ -60,14 +60,17 @@ button:hover {
     background-color: #0056b3;
 }
 
+
 .result {
     margin-top: 20px;
     padding: 20px;
     background-color: #e9ecef;
     border: 1px solid #ccc;
     border-radius: 8px;
-    width: 80%;
+    width: 50%; 
     max-width: 600px;
     text-align: center;
-    display: none; /* Ocultar até que o resultado seja exibido */
+    margin-left: auto; 
+    margin-right: auto; 
+    display: none;
 }
